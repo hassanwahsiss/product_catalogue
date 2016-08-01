@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_product_catalogue_form" model="ir.ui.view">
+            <field name="name">Products catalogue</field>
+            <field name="model">product.catalogue</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Products catalogue">
+                    <sheet>    
+                        <group string="Catalogue name">
+                            <field name="name" nolabel="1" />
+                        </group>
+
+                        <group string="Printing Options">
+                            <group>
+                                <field name="withpriceHT" />
+                                <field name="withpriceTTC" />
+                            </group>
+                            <group>
+                                <field name="withstock" />
+                            </group>
+
+                        </group>
+
+                        <group string="Products">
+                            <field name="product_ids" nolabel="1" />
+                        </group>
+
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_product_catalogue_tree" model="ir.ui.view">
+            <field name="name">Products catalogue</field>
+            <field name="model">product.catalogue</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">         
+                <tree string="Products catalogue">    
+                    <field name="name" />
+                    <field name="withpriceHT" />
+                    <field name="withpriceTTC" />
+                    <field name="withstock" />
+                    <field name="product_ids" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_product_catalogue" model="ir.actions.act_window"> 
+         <!-- rename id -->
+            <field name="name">Products catalogue</field>
+            <field name="res_model">product.catalogue</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            name="Products catalogue"
+            parent="base.menu_product"
+            action="action_product_catalogue"
+            id="menu_product_catalogue"
+           />
+
+    </data>
+</openerp>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="report_product_catalogue">
+    		<t t-call="report.html_container">
+        		<t t-foreach="docs" t-as="o">
+            		<t t-call="report.external_layout">
+
+                <div class="page" >
+
+                  <div style="container">
+                   <div style="text-align:center;"> 
+                   		<h2>Products catalogue</h2> <br/> <br/>
+               		</div>
+
+
+		            <div class="center-block">
+		                <img t-if="user.company_id.logo" t-att-src="'data:image/png;base64,%s' % user.company_id.logo" style="max-height: 200px;" class="center-block"/>
+		            </div>
+
+                    	<p style="page-break-before:always;"> </p>
+                  </div>
+						
+						    <table class="table table-bordered"> 
+
+							    <thead>
+		                            <tr>
+		                                <th style="vertical-align: middle;">Photo</th>
+		                                <th style="vertical-align: middle;">item code</th>
+		                                <th style="vertical-align: middle;">Designation</th>
+		                                <th style="vertical-align: middle;">Sales unit</th>
+		                                <t t-if="o.withpriceHT">
+		                                	<th style="vertical-align: middle;">Unit pre-tax price</th>
+		                                </t>
+		                                <t t-if="o.withpriceTTC">
+		                                	<th style="vertical-align: middle;">Unit price inc. VAT</th>
+		                                </t>
+		                                <t t-if="o.withstock">
+		                                	<th style="vertical-align: middle;">Stock</th>
+		                                </t>
+
+		                            </tr>
+	                        	</thead>
+
+	                        	<tbody>
+		                            <tr t-foreach="o.product_ids" t-as="p">
+		                                <td><span t-field="p.image_medium" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
+		                                <td><span t-field="p.default_code"/></td>
+		                                <td><span t-field="p.name"/></td>
+		                                <td><span t-field="p.uom_id"/></td>
+		                                <t t-if="o.withpriceHT">
+		                                	<td><span t-field="p.list_price"/></td>
+		                                </t>
+		                                <t t-if="o.withpriceTTC">
+		                                	<td><span t-esc="p.list_price*(1 + sum(t.amount for t in p.taxes_id))"/></td>
+		                                </t>
+		                                <t t-if="o.withstock">
+		                                	<td><span t-field="p.qty_available"/></td>
+		                                </t>
+		                            </tr>
+	                        	</tbody>
+                			</table>
+
+								 
+				</div>	
+						    
+           		 	</t>
+        		</t>
+    		</t>
+		</template>
+
+		<template id="report.style" name="style">
+            <![CDATA[ 	
+						thead { background-color:silver;} 
+						.table {
+  								border: 1.5px solid black;
+  								height:50%;
+							}
+						.table-bordered > thead > tr > th,
+						.table-bordered > tbody > tr > th,
+						.table-bordered > tfoot > tr > th,
+						.table-bordered > thead > tr > td,
+						.table-bordered > tbody > tr > td,
+						.table-bordered > tfoot > tr > td {
+						   border: 1.5px solid black;
+						}
+						th {text-align: center; vertical-align: middle;}
+						tr {
+							page-break-inside:avoid;
+						} 
+						.AAAA { height: 500%; weight:100%; color:red;}
+ 						
+
+             ]]>
+</template>
+	</data>
+</openerp>
