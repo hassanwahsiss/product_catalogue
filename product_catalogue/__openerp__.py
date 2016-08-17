@@ -23,7 +23,7 @@
 {
     "name" : "Product catalogue",
     
-    "author" : "Hassan wahsiss",
+    "author" : "Développeur Hassan wahsiss",
     
     
     "licence" : "AGPL-3",
